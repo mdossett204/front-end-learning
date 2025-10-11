@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import Button from "@/app/components/Button";
+import DeleteButton from "@/app/components/DeleteButton";
 
 export default function About() {
   return (
@@ -22,6 +23,7 @@ export default function About() {
         <Link href="/" className="text-blue-600 hover:underline">
           <Button text="Click to go to homepage!" />
         </Link>
+        <DeleteButton text="delete me!" />
       </main>
       <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
         <a
