@@ -66,7 +66,7 @@ export default function EditTargetDialog({
               name="entryValue"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Target Value</FormLabel>
+                  <FormLabel>Entry Value</FormLabel>
                   <FormControl>
                     <Input
                       type="text"
