@@ -1,6 +1,8 @@
 "use client";
 import { useState } from "react";
 import HealthEntryCard from "@/components/HealthEntryCard";
+import HealthSidebar from "@/components/HealthSideBar";
+import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
 
 export default function AdaptiveHealthLanding() {
   const [healthMetrics, setHealthMetrics] = useState([
@@ -60,25 +62,50 @@ export default function AdaptiveHealthLanding() {
       )
     );
   };
+
+  const [username, setUsername] = useState<string | null>(null);
+
+  const handleLogin = (user: string) => {
+    setUsername(user);
+  };
+
+  const handleLogout = () => {
+    setUsername(null);
+  };
   return (
-    <div className="min-h-screen bg-gradient-to-br from-white via-blue-50 to-emerald-50 p-8">
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        {healthMetrics.map((metric) => (
-          <HealthEntryCard
-            key={metric.id}
-            id={metric.id}
-            category={metric.category}
-            entry={metric.entry}
-            target={metric.target}
-            unit={metric.unit}
-            bgColor={metric.bgColor}
-            borderColor={metric.borderColor}
-            categoryColor={metric.categoryColor}
-            onEditTarget={handleEditTarget}
-            onAddEntry={handleAddEntry}
-          />
-        ))}
+    <SidebarProvider defaultOpen>
+      <div className="flex h-screen w-screen overflow-hidden bg-gradient-to-br from-white via-blue-50 to-emerald-50">
+        <HealthSidebar
+          username={username}
+          onLogin={handleLogin}
+          onLogout={handleLogout}
+        />
+        <main className="flex-1 overflow-y-auto px-6 py-8">
+          <div className="flex items-center justify-between mb-8">
+            <h1 className="text-3xl font-bold bg-gradient-to-r from-blue-600 to-emerald-600 bg-clip-text text-transparent">
+              Adaptive Health Dashboard
+            </h1>
+            <SidebarTrigger className="md:hidden" />
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+            {healthMetrics.map((metric) => (
+              <HealthEntryCard
+                key={metric.id}
+                id={metric.id}
+                category={metric.category}
+                entry={metric.entry}
+                target={metric.target}
+                unit={metric.unit}
+                bgColor={metric.bgColor}
+                borderColor={metric.borderColor}
+                categoryColor={metric.categoryColor}
+                onEditTarget={handleEditTarget}
+                onAddEntry={handleAddEntry}
+              />
+            ))}
+          </div>
+        </main>
       </div>
-    </div>
+    </SidebarProvider>
   );
 }
