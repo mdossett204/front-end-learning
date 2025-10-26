@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Button } from "@/components/ui/button";
-import { Moon, Sun, Activity, Home, CloudMoon, BeefIcon } from "lucide-react";
+import { Moon, Sun, Activity, Home, CloudMoon, Beef } from "lucide-react";
 import { useTheme } from "./ThemeProvider";
 
 export function Navigation() {
@@ -14,7 +14,7 @@ export function Navigation() {
     { href: "/", label: "Dashboard", icon: Home },
     { href: "/fitness", label: "Fitness", icon: Activity },
     { href: "/sleep", label: "Sleep", icon: CloudMoon },
-    { href: "/nutrition", label: "Nutrition", icon: BeefIcon },
+    { href: "/nutrition", label: "Nutrition", icon: Beef },
   ];
 
   const isActive = (href: string) => {
